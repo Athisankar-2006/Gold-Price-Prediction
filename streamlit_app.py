@@ -19,13 +19,19 @@ if st.button("Predict Gold Price"):
         "USD_INR": usd_inr
     }
 
+    API_URL="web-production-bc33c.up.railway.app"
+
     response = requests.post(
-        "http://127.0.0.1:5000/predict",
+        API_URL,
         json=payload
     )
+    try:
+        response=requests.post(API_URL,json=payload)
 
-    if response.status_code == 200:
-        result = response.json()
-        st.success(f"Predicted Gold Price: ₹ {result['predicted_gold_price']}")
-    else:
-        st.error("Flask server not running")
+        if response.status_code == 200:
+            result = response.json()
+            st.success(f"Predicted Gold Price: ₹ {result['predicted_gold_price']}")
+        else:
+            st.error("API ERROR :",response.text)
+    except Exception as e:
+        st.error(f"connection failed:{e}")
