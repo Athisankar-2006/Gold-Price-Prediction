@@ -19,7 +19,8 @@ if st.button("Predict Gold Price"):
         "USD_INR": usd_inr
     }
 
-    API_URL="web-production-bc33c.up.railway.app"
+    API_URL = "https://web-production-bc33c.up.railway.app/predict"
+
 
     response = requests.post(
         API_URL,
